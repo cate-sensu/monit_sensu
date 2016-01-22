@@ -1,0 +1,11 @@
+set mailserver <%= node[:monit][:alert][:mail][:server] %>
+set alert <%= node[:monit][:alert][:mail][:to] %> with reminder on <%= node[:monit][:alert][:mail][:cycles] %> cycles
+
+set mail-format {
+      from: <%= node[:monit][:alert][:mail][:from] %>
+#  reply-to: support@domain.com
+   subject: monit alert - $EVENT at $DATE
+   message: Monit $ACTION $SERVICE at $DATE on $HOST: $DESCRIPTION.
+            Yours sincerely,
+            monit
+}

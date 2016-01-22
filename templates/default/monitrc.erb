@@ -1,0 +1,13 @@
+  set daemon <%= node[:monit][:daemon] %>            # check services at 2-minute intervals
+      with start delay <%= node[:monit][:start_delay] %>
+  set logfile /var/log/monit.log
+  set idfile /var/lib/monit/id
+  set statefile /var/lib/monit/state
+  set eventqueue
+      basedir /var/lib/monit/events # set the base directory where events will be stored
+      slots 100                     # optionally limit the queue size
+ set httpd port <%= node[:monit][:httpd][:port] %> and
+    use address <%= node[:monit][:httpd][:address] %>  
+    allow localhost       
+    allow <%= node[:monit][:httpd][:user] -%>:<%= node[:monit][:httpd][:pass] %>
+   include /etc/monit/conf.d/*
